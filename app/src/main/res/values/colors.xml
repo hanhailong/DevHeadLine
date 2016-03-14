@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff27b5ee</color>
+    <color name="colorPrimaryDark">#ff159cd1</color>
+    <color name="colorAccent">#ff0288d1</color>
+    <color name="tra_color_primary">#8f27b5ee</color>
+    
+    <color name="color_black">#000000</color>
+    <color name="color_dark_grey">#555555</color>
+    <color name="color_grey">#808080</color>
+    <color name="color_light_grey">#aaaaaa</color>
+    <color name="color_light_white">#f4f4f4</color>
+    <color name="color_lighter_grey">#d3d3d3</color>
+</resources>

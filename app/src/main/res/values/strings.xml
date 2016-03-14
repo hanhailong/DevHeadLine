@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">开发者头条</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--nav menu-->
+    <string name="nav_home">首页</string>
+    <string name="nav_share">我的分享</string>
+    <string name="nav_create_subject">我创建的主题</string>
+    <string name="nav_subscribe_subject">我订阅的主题</string>
+    <string name="nav_favorite">我的收藏</string>
+    <string name="nav_feedback">意见反馈</string>
+    <string name="nav_setting">设置</string>
+</resources>

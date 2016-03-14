@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/group_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_grey600_24dp"
+            android:title="@string/nav_home" />
+    </group>
+
+    <group
+        android:id="@+id/group_2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_description_grey600_24dp"
+            android:title="@string/nav_share"
+            app:actionLayout="@layout/msg_notice" />
+        <item
+            android:id="@+id/nav_create_theme"
+            android:icon="@drawable/ic_subject_grey600_24dp"
+            android:title="@string/nav_create_subject"
+            app:actionLayout="@layout/msg_notice" />
+        <item
+            android:id="@+id/nav_subscrier_theme"
+            android:icon="@drawable/ic_assignment_turned_in_grey600_24dp"
+            android:title="@string/nav_subscribe_subject"
+            app:actionLayout="@layout/msg_notice" />
+        <item
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_favorite_grey600_24dp"
+            android:title="@string/nav_favorite"
+            app:actionLayout="@layout/msg_notice" />
+    </group>
+
+    <group
+        android:id="@+id/group_3"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/main_nav_ic_feedback_grey_24dp"
+            android:title="@string/nav_feedback" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/main_nav_ic_setting_grey_24dp"
+            android:title="@string/nav_setting" />
+    </group>
+</menu>
