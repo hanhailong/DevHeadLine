@@ -9,7 +9,6 @@
 
     <style name="AppTheme.NoActionBar.Launch">
         <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 </resources>

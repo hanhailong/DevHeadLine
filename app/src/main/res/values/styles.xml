@@ -13,7 +13,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.Launch"></style>
+    <style name="AppTheme.NoActionBar.Launch">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

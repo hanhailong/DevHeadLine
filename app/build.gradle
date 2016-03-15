@@ -30,4 +30,5 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile 'com.facebook.fresco:fresco:0.9.0'
 }

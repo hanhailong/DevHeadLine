@@ -2,6 +2,7 @@ package com.hhl.devheadline.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.hhl.devheadline.R;
 import com.hhl.devheadline.ui.fragment.HomeFragment;
 import com.hhl.devheadline.ui.fragment.ShareFragment;
@@ -40,15 +42,6 @@ public class MainActivity extends BaseActivity
             setSupportActionBar(mToolbar);
         }
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -57,6 +50,11 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        SimpleDraweeView avatarView = (SimpleDraweeView) navigationView.getHeaderView(0).findViewById(R.id.sdv_avatar);
+        if (avatarView != null) {
+            avatarView.setImageURI(Uri.parse("https://avatars2.githubusercontent.com/u/4241807?v=3&s=460"));
+        }
 
         //fragment Manager
         managerFragment(savedInstanceState);
@@ -68,14 +66,15 @@ public class MainActivity extends BaseActivity
      * @param savedInstanceState
      */
     private void managerFragment(Bundle savedInstanceState) {
+        FragmentManager fm = getSupportFragmentManager();
         if (savedInstanceState == null) {
             mHomeFragment = HomeFragment.newInstance("1", "2");
             mShareFragment = ShareFragment.newInstance("3", "4");
-
-            FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().add(R.id.container, mHomeFragment)
-                    .add(R.id.container, mShareFragment).hide(mShareFragment).show(mHomeFragment).commit();
+                    .add(R.id.container, mShareFragment).commit();
         }
+        
+        fm.beginTransaction().hide(mShareFragment).show(mHomeFragment).commit();
     }
 
     @Override
