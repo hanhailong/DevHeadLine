@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity
             fm.beginTransaction().add(R.id.container, mHomeFragment)
                     .add(R.id.container, mShareFragment).commit();
         }
-        
+
         fm.beginTransaction().hide(mShareFragment).show(mHomeFragment).commit();
     }
 
