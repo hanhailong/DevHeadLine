@@ -1,12 +1,10 @@
 package com.hhl.devheadline.ui.fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.hhl.devheadline.R;
+import com.hhl.devheadline.presenter.NavSharePresenter;
+import com.hhl.devheadline.ui.iview.INavShareView;
 
 /**
  * A fragment with a Google +1 button.
@@ -16,7 +14,7 @@ import com.hhl.devheadline.R;
  * Use the {@link ShareFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShareFragment extends BaseFragment {
+public class ShareFragment extends BaseFragment<NavSharePresenter> implements INavShareView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,27 +59,13 @@ public class ShareFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_share, container, false);
-
-
-        return view;
+    protected int getContentView() {
+        return R.layout.fragment_share;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        // Refresh the state of the +1 button each time the activity receives focus.
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    protected NavSharePresenter getPresenter() {
+        return new NavSharePresenter(this);
     }
 
 }

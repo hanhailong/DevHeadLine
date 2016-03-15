@@ -1,13 +1,11 @@
 package com.hhl.devheadline.ui.fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.hhl.devheadline.R;
+import com.hhl.devheadline.presenter.NavHomePresenter;
+import com.hhl.devheadline.ui.iview.INavHomeView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,7 +15,7 @@ import com.hhl.devheadline.R;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment<NavHomePresenter> implements INavHomeView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -60,17 +58,13 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    protected int getContentView() {
+        return R.layout.fragment_home;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    protected NavHomePresenter getPresenter() {
+        return new NavHomePresenter(this);
     }
 
 

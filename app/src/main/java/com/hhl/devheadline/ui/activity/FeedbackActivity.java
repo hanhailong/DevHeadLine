@@ -5,17 +5,27 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.hhl.devheadline.R;
+import com.hhl.devheadline.presenter.FeedbackPresenter;
+import com.hhl.devheadline.ui.iview.IFeedbackView;
 
-public class FeedbackActivity extends BaseActivity {
+public class FeedbackActivity extends BaseActivity<FeedbackPresenter> implements IFeedbackView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback);
 
-        setSupportActionBar(mToolbar);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_feedback;
+    }
+
+    @Override
+    protected FeedbackPresenter getPresenter() {
+        return new FeedbackPresenter(this);
     }
 
     /**

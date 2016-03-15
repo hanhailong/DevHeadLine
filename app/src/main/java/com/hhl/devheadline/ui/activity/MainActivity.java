@@ -15,11 +15,13 @@ import android.view.MenuItem;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hhl.devheadline.R;
+import com.hhl.devheadline.presenter.MainPresenter;
 import com.hhl.devheadline.ui.fragment.HomeFragment;
 import com.hhl.devheadline.ui.fragment.ShareFragment;
+import com.hhl.devheadline.ui.iview.IMainView;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity<MainPresenter>
+        implements NavigationView.OnNavigationItemSelectedListener, IMainView {
 
     private HomeFragment mHomeFragment;
     private ShareFragment mShareFragment;
@@ -37,10 +39,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if (mToolbar != null) {
-            setSupportActionBar(mToolbar);
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,6 +56,16 @@ public class MainActivity extends BaseActivity
 
         //fragment Manager
         managerFragment(savedInstanceState);
+    }
+
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected MainPresenter getPresenter() {
+        return new MainPresenter(this);
     }
 
     /**
