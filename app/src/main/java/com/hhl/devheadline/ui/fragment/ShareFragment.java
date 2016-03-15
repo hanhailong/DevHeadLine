@@ -1,6 +1,7 @@
 package com.hhl.devheadline.ui.fragment;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.hhl.devheadline.R;
 import com.hhl.devheadline.presenter.NavSharePresenter;
@@ -66,6 +67,11 @@ public class ShareFragment extends BaseFragment<NavSharePresenter> implements IN
     @Override
     protected NavSharePresenter getPresenter() {
         return new NavSharePresenter(this);
+    }
+
+    @Override
+    protected void init(View view) {
+
     }
 
 }

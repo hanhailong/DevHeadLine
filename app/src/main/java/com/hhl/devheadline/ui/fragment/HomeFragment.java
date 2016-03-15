@@ -1,11 +1,20 @@
 package com.hhl.devheadline.ui.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.hhl.devheadline.R;
 import com.hhl.devheadline.presenter.NavHomePresenter;
+import com.hhl.devheadline.ui.adapter.HomeAdapter;
 import com.hhl.devheadline.ui.iview.INavHomeView;
+
+import java.util.List;
+
+import butterknife.Bind;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +25,16 @@ import com.hhl.devheadline.ui.iview.INavHomeView;
  * create an instance of this fragment.
  */
 public class HomeFragment extends BaseFragment<NavHomePresenter> implements INavHomeView {
+
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
+    @Bind(R.id.tab_layout)
+    TabLayout mTabLayout;
+    @Bind(R.id.viewpager)
+    ViewPager mViewPager;
+
+    private HomeAdapter mHomeAdapter;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,11 +43,6 @@ public class HomeFragment extends BaseFragment<NavHomePresenter> implements INav
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
 
     /**
      * Use this factory method to create a new instance of
@@ -67,5 +81,25 @@ public class HomeFragment extends BaseFragment<NavHomePresenter> implements INav
         return new NavHomePresenter(this);
     }
 
+    @Override
+    protected void init(View view) {
+        mToolbar.setTitle(R.string.app_name);
 
+        mHomeAdapter = new HomeAdapter(getChildFragmentManager());
+        mViewPager.setAdapter(mHomeAdapter);
+
+        mTabLayout.setupWithViewPager(mViewPager);
+
+        initData();
+    }
+
+    private void initData() {
+        mPresenter.initTabLayout();
+    }
+
+
+    @Override
+    public void loadTabData(List<BaseFragment> list, List<CharSequence> titles) {
+        mHomeAdapter.addDataList(list, titles);
+    }
 }

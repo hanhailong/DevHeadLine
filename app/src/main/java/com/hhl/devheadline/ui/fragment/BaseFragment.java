@@ -33,6 +33,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getContentView(), container, false);
         ButterKnife.bind(this, view);
+        init(view);
         return view;
     }
 
@@ -60,6 +61,13 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
      * @return
      */
     protected abstract P getPresenter();
+
+    /**
+     * init view
+     *
+     * @param view
+     */
+    protected abstract void init(View view);
 
     @Override
     public void onAttach(Context context) {
