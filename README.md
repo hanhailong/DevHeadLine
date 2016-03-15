@@ -6,6 +6,10 @@
 
 ![](screenshot/devheadline.gif)
 
+# 修改日期
+* 16/3/15 添加MVP、fresco
+* 16/3/16 添加Retrofit2.0
+
 # TODO
 
 1. 构建MVP
