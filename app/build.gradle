@@ -1,34 +1,68 @@
 apply plugin: 'com.android.application'
 
+def config = rootProject.ext.configuration
+def libs = rootProject.ext.libraries
+
 android {
-    compileSdkVersion 23
-    buildToolsVersion "24.0.0 rc1"
+    compileSdkVersion config.COMPILE_VERSION
+    buildToolsVersion config.BUILD_TOOLS_VERSION
 
     defaultConfig {
-        applicationId "com.hhl.devheadline"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        applicationId config.PACKAGE_NAME
+        minSdkVersion config.MIN_SDK
+        targetSdkVersion config.TARGET_SDK
+        versionCode config.VERSION_CODE
+        versionName config.VERSION_NAME
     }
+
+    dexOptions {
+        incremental true
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
+    productFlavors {
+        dev {
+            //目的，加速编译，利用ART
+            minSdkVersion 21
+        }
+        pro {
+            minSdkVersion config.MIN_SDK
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            applicationIdSuffix ".debug"
+        }
+    }
+
+    // 注释冲突
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
-    compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
-    compile 'com.facebook.fresco:fresco:0.9.0'
+    //support
+    compile "com.android.support:appcompat-v7:${libs.version_support}"
+    compile "com.android.support:design:${libs.version_support}"
+    compile "com.android.support:support-v4:${libs.version_support}"
+    //butterknife依赖注入
+    compile "com.jakewharton:butterknife:${libs.VERSION_BUTTERKNIFE}"
+    //ReactiveX
+    compile "io.reactivex:rxandroid:${libs.VERSION_RX}"
+    compile "io.reactivex:rxjava:${libs.VERSION_RX}"
+    //retrofit2网络请求
+    compile "com.squareup.retrofit2:retrofit:${libs.VERSION_RETROFIT}"
+    compile "com.squareup.retrofit2:converter-gson:${libs.VERSION_RETROFIT_GSON}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${libs.VERSION_RETROFIT_RXJAVA}"
+    //fresco图片加载
+    compile "com.facebook.fresco:fresco:${libs.VERSION_FRESCO}"
 }

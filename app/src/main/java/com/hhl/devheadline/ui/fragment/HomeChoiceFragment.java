@@ -5,12 +5,16 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hhl.devheadline.R;
+import com.hhl.devheadline.model.Banner;
 import com.hhl.devheadline.presenter.HomeChoicePresenter;
 import com.hhl.devheadline.ui.adapter.HomeChoiceAdapter;
 import com.hhl.devheadline.ui.iview.IHomeChoiceView;
 import com.hhl.devheadline.ui.view.DHLSwipeRefreshLayout;
+
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -52,5 +56,24 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
                 }, 2000);
             }
         });
+
+        mPresenter.loadBanners();
+    }
+
+    @Override
+    public void fillBannerData(List<Banner> list) {
+        for (Banner banner : list) {
+            Toast.makeText(getActivity(), banner.getTitle(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void loadError(Throwable e) {
+        Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loadComplete() {
+        Toast.makeText(getActivity(), "Complete", Toast.LENGTH_SHORT).show();
     }
 }

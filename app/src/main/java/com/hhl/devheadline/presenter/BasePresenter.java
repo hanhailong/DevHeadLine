@@ -1,5 +1,7 @@
 package com.hhl.devheadline.presenter;
 
+import com.hhl.devheadline.core.net.ApiService;
+import com.hhl.devheadline.core.net.RetrofitFactory;
 import com.hhl.devheadline.ui.iview.IBaseView;
 
 /**
@@ -10,6 +12,8 @@ import com.hhl.devheadline.ui.iview.IBaseView;
 public abstract class BasePresenter<V extends IBaseView> {
 
     protected V mView;
+
+    protected static final ApiService mApiService = RetrofitFactory.getApiService();
 
     public BasePresenter(V view) {
         this.mView = view;
