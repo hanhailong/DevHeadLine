@@ -19,8 +19,18 @@ import com.hhl.devheadline.ui.fragment.HomeFragment;
 import com.hhl.devheadline.ui.fragment.ShareFragment;
 import com.hhl.devheadline.ui.iview.IMainView;
 
+import butterknife.Bind;
+
 public class MainActivity extends BaseActivity<MainPresenter>
         implements NavigationView.OnNavigationItemSelectedListener, IMainView {
+
+    /**
+     * 打开菜单
+     */
+    public static final String SCHEME_OPEN_MENU = "scheme_open_menu";
+
+    @Bind(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
 
     private HomeFragment mHomeFragment;
     private ShareFragment mShareFragment;
@@ -80,8 +90,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
     private void managerFragment(Bundle savedInstanceState) {
         FragmentManager fm = getSupportFragmentManager();
         if (savedInstanceState == null) {
-            mHomeFragment = HomeFragment.newInstance("1", "2");
-            mShareFragment = ShareFragment.newInstance("3", "4");
+            mHomeFragment = HomeFragment.newInstance();
+            mShareFragment = ShareFragment.newInstance();
             fm.beginTransaction().add(R.id.container, mHomeFragment)
                     .add(R.id.container, mShareFragment).commit();
         }
@@ -91,9 +101,8 @@ public class MainActivity extends BaseActivity<MainPresenter>
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -127,8 +136,7 @@ public class MainActivity extends BaseActivity<MainPresenter>
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
 
         if (id == R.id.nav_feedback) {
             new Handler().postDelayed(new Runnable() {
@@ -164,4 +172,11 @@ public class MainActivity extends BaseActivity<MainPresenter>
         return true;
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        super.onFragmentInteraction(uri);
+        if (SCHEME_OPEN_MENU.equals(uri.getScheme())) {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+        }
+    }
 }

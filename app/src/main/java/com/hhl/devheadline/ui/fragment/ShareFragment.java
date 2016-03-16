@@ -1,11 +1,19 @@
 package com.hhl.devheadline.ui.fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.hhl.devheadline.R;
 import com.hhl.devheadline.presenter.NavSharePresenter;
+import com.hhl.devheadline.ui.activity.MainActivity;
 import com.hhl.devheadline.ui.iview.INavShareView;
+import com.hhl.devheadline.ui.view.DHLSwipeRefreshLayout;
+
+import butterknife.Bind;
 
 /**
  * A fragment with a Google +1 button.
@@ -16,36 +24,20 @@ import com.hhl.devheadline.ui.iview.INavShareView;
  * create an instance of this fragment.
  */
 public class ShareFragment extends BaseFragment<NavSharePresenter> implements INavShareView {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    // The request code must be 0 or greater.
-    private static final int PLUS_ONE_REQUEST_CODE = 0;
-    // The URL to +1.  Must be a valid URL.
-    private final String PLUS_ONE_URL = "http://developer.android.com";
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public ShareFragment() {
-        // Required empty public constructor
-    }
+    @Bind(R.id.toolbar)
+    Toolbar mToolbar;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShareFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShareFragment newInstance(String param1, String param2) {
+    //TODO 将下拉刷新封装一下
+    @Bind(R.id.swipe_refresh_layout)
+    DHLSwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Bind(R.id.recyclerview)
+    RecyclerView mRecyclerView;
+
+    public static ShareFragment newInstance() {
         ShareFragment fragment = new ShareFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,8 +46,6 @@ public class ShareFragment extends BaseFragment<NavSharePresenter> implements IN
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -71,6 +61,22 @@ public class ShareFragment extends BaseFragment<NavSharePresenter> implements IN
 
     @Override
     protected void init(View view) {
+        mToolbar.setTitle(R.string.nav_share);
+        mToolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        mToolbar.inflateMenu(R.menu.menu_add_share);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = new Uri.Builder().scheme(MainActivity.SCHEME_OPEN_MENU).build();
+                mListener.onFragmentInteraction(uri);
+            }
+        });
 
     }
 

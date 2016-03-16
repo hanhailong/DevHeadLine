@@ -4,10 +4,16 @@
     android:layout_height="match_parent"
     tools:context="com.hhl.devheadline.ui.fragment.ShareFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include layout="@layout/common_titlebar" />
+
+    <com.hhl.devheadline.ui.view.DHLSwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/nav_share" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.hhl.devheadline.ui.view.DHLSwipeRefreshLayout>
 </FrameLayout>

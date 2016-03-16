@@ -11,4 +11,8 @@
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
+
+    <style name="AppTheme.NoActionBar.Activity">
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
 </resources>
