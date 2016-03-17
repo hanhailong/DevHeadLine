@@ -1,12 +1,19 @@
 package com.hhl.devheadline.ui.fragment;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.hhl.devheadline.R;
 import com.hhl.devheadline.model.Banner;
 import com.hhl.devheadline.presenter.HomeChoicePresenter;
@@ -17,6 +24,8 @@ import com.hhl.devheadline.ui.view.DHLSwipeRefreshLayout;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
+import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 
 /**
  * Created by HanHailong on 16/3/15.
@@ -26,7 +35,9 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
     @Bind(R.id.swipe_refresh_layout)
     DHLSwipeRefreshLayout mSwipeRefreshLayout;
     @Bind(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    FamiliarRecyclerView mRecyclerView;
+
+    private ConvenientBanner<Banner> mBannerV;
 
     @Override
     protected int getContentView() {
@@ -40,9 +51,10 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
 
     @Override
     protected void init(View view) {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(new HomeChoiceAdapter());
 
+        mBannerV = (ConvenientBanner) View.inflate(getActivity(), R.layout.view_home_banner, null);
+        mRecyclerView.addHeaderView(mBannerV);
+        mRecyclerView.setAdapter(new HomeChoiceAdapter());
         //TODO
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -62,8 +74,41 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
 
     @Override
     public void fillBannerData(List<Banner> list) {
-        for (Banner banner : list) {
-            Toast.makeText(getActivity(), banner.getTitle(), Toast.LENGTH_SHORT).show();
+
+        mBannerV.setPages(new CBViewHolderCreator<BannerViewHolder>() {
+            @Override
+            public BannerViewHolder createHolder() {
+                return new BannerViewHolder();
+            }
+        }, list).setPageIndicator(new int[]{R.drawable.ic_banner_indicator_unselected
+                , R.drawable.ic_banner_indicator_selected})
+                .setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        Toast.makeText(getActivity(), "你点击了" + position, Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private static class BannerViewHolder implements Holder<Banner> {
+
+        private SimpleDraweeView mImageView;
+        private TextView mTextView;
+
+        @Override
+        public View createView(Context context) {
+            View view = LayoutInflater.from(context).inflate(R.layout.view_banner_item, null);
+            mImageView = ButterKnife.findById(view, R.id.sdv_image);
+            mTextView = ButterKnife.findById(view, R.id.tv_title);
+            return view;
+        }
+
+        @Override
+        public void UpdateUI(Context context, int position, Banner data) {
+            if (data != null) {
+                mImageView.setImageURI(Uri.parse(data.getImage()));
+                mTextView.setText(data.getTitle());
+            }
         }
     }
 
@@ -74,6 +119,18 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
 
     @Override
     public void loadComplete() {
-        Toast.makeText(getActivity(), "Complete", Toast.LENGTH_SHORT).show();
+        //TODO
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mBannerV.startTurning(3000);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mBannerV.stopTurning();
     }
 }

@@ -35,12 +35,14 @@ ext {
     ]
 
     libraries = [
-            version_support        : '23.2.1',
-            VERSION_BUTTERKNIFE    : "7.0.1",
-            VERSION_RETROFIT       : "2.0.0",
-            VERSION_RETROFIT_GSON  : "2.0.0",
-            VERSION_RETROFIT_RXJAVA: "2.0.0",
-            VERSION_RX             : "1.1.0",
-            VERSION_FRESCO         : "0.9.0"
+            version_support              : '23.2.1',
+            VERSION_BUTTERKNIFE          : "7.0.1",
+            VERSION_RETROFIT             : "2.0.0",
+            VERSION_RETROFIT_GSON        : "2.0.0",
+            VERSION_RETROFIT_RXJAVA      : "2.0.0",
+            VERSION_RX                   : "1.1.0",
+            VERSION_FRESCO               : "0.9.0",
+            VERSION_CONVENIENT_BANNER    : "2.0.5",
+            VERSION_FAMILIER_RECYCLERVIEW: "1.2.4"
     ]
 }

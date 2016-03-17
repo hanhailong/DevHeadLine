@@ -21,7 +21,7 @@ public class NavHomePresenter extends BasePresenter<INavHomeView> {
 
     List<BaseFragment> mFragmentList = new ArrayList<>();
 
-    private CharSequence[] mTitles = {"精选", "订阅", "发现"};
+    public CharSequence[] mTitles = {"精选", "订阅", "发现"};
 
     public void initTabLayout() {
         mFragmentList.clear();

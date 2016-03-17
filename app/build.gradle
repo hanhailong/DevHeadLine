@@ -65,4 +65,8 @@ dependencies {
     compile "com.squareup.retrofit2:adapter-rxjava:${libs.VERSION_RETROFIT_RXJAVA}"
     //fresco图片加载
     compile "com.facebook.fresco:fresco:${libs.VERSION_FRESCO}"
+    //轮播图
+    compile "com.bigkoo:convenientbanner:${libs.VERSION_CONVENIENT_BANNER}"
+    //带addHeaderView和addFooterView的Recyclerview
+    compile "com.github.iwgang:familiarrecyclerview:${libs.VERSION_FAMILIER_RECYCLERVIEW}"
 }

@@ -89,6 +89,8 @@ public class HomeFragment extends BaseFragment<NavHomePresenter> implements INav
 
         mHomeAdapter = new HomeAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mHomeAdapter);
+        //缓存
+        mViewPager.setOffscreenPageLimit(mPresenter.mTitles.length);
 
         mTabLayout.setupWithViewPager(mViewPager);
 
