@@ -15,6 +15,7 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hhl.devheadline.R;
+import com.hhl.devheadline.model.Article;
 import com.hhl.devheadline.model.Banner;
 import com.hhl.devheadline.presenter.HomeChoicePresenter;
 import com.hhl.devheadline.ui.adapter.HomeChoiceAdapter;
@@ -70,6 +71,8 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
         });
 
         mPresenter.loadBanners();
+
+        mPresenter.loadArticleDataList();
     }
 
     @Override
@@ -120,6 +123,14 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
     @Override
     public void loadComplete() {
         //TODO
+    }
+
+    @Override
+    public void fillArticleList(List<Article> list) {
+        //TODO
+        if (list != null && list.size() > 0) {
+            Toast.makeText(getActivity(), list.get(0).getTitle(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
