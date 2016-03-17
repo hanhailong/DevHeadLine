@@ -7,8 +7,10 @@
 ![](screenshot/devheadline.gif)
 
 # 修改日期
-* 16/3/15 添加MVP、fresco
+
+* 16/3/17 封装Retrofit2+RxJava，添加首页Banner，并集成开发者头条的Banner接口
 * 16/3/16 添加Retrofit2.0
+* 16/3/15 添加MVP、fresco
 
 # TODO
 
