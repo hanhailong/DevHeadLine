@@ -40,6 +40,8 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
 
     private ConvenientBanner<Banner> mBannerV;
 
+    private HomeChoiceAdapter mAdapter;
+
     @Override
     protected int getContentView() {
         return R.layout.fragment_home_choice;
@@ -55,7 +57,9 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
 
         mBannerV = (ConvenientBanner) View.inflate(getActivity(), R.layout.view_home_banner, null);
         mRecyclerView.addHeaderView(mBannerV);
-        mRecyclerView.setAdapter(new HomeChoiceAdapter());
+
+        mAdapter = new HomeChoiceAdapter();
+        mRecyclerView.setAdapter(mAdapter);
         //TODO
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -127,10 +131,7 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
 
     @Override
     public void fillArticleList(List<Article> list) {
-        //TODO
-        if (list != null && list.size() > 0) {
-            Toast.makeText(getActivity(), list.get(0).getTitle(), Toast.LENGTH_SHORT).show();
-        }
+        mAdapter.addDataList(list);
     }
 
     @Override
