@@ -1,5 +1,6 @@
 package com.hhl.devheadline.ui.iview;
 
+import com.hhl.devheadline.model.Article;
 import com.hhl.devheadline.model.Banner;
 
 import java.util.List;
@@ -27,5 +28,12 @@ public interface IHomeChoiceView extends IBaseView {
      * 加载完成
      */
     void loadComplete();
+
+    /**
+     * 填充
+     *
+     * @param list
+     */
+    void fillArticleList(List<Article> list);
 
 }
