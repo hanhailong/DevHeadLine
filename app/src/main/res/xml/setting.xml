@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="联系我们">
+        <PreferenceScreen
+            android:summary="我们以开发的心态需求合作"
+            android:title="商务合作">
+            <intent android:targetClass="com.hhl.devheadline.ui.activity.BusinessCoopActivity" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>
