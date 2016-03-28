@@ -18,7 +18,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.activity.FeedbackActivity"
             android:label="@string/nav_feedback"
@@ -36,6 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.BusinessCoopActivity"
+            android:theme="@style/AppTheme.NoActionBar.Activity" />
     </application>
 
 </manifest>

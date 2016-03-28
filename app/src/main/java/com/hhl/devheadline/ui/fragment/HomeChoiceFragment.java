@@ -15,6 +15,7 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hhl.devheadline.R;
+import com.hhl.devheadline.model.Article;
 import com.hhl.devheadline.model.Banner;
 import com.hhl.devheadline.presenter.HomeChoicePresenter;
 import com.hhl.devheadline.ui.adapter.HomeChoiceAdapter;
@@ -39,6 +40,8 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
 
     private ConvenientBanner<Banner> mBannerV;
 
+    private HomeChoiceAdapter mAdapter;
+
     @Override
     protected int getContentView() {
         return R.layout.fragment_home_choice;
@@ -54,7 +57,9 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
 
         mBannerV = (ConvenientBanner) View.inflate(getActivity(), R.layout.view_home_banner, null);
         mRecyclerView.addHeaderView(mBannerV);
-        mRecyclerView.setAdapter(new HomeChoiceAdapter());
+
+        mAdapter = new HomeChoiceAdapter();
+        mRecyclerView.setAdapter(mAdapter);
         //TODO
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -70,6 +75,8 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
         });
 
         mPresenter.loadBanners();
+
+        mPresenter.loadArticleDataList();
     }
 
     @Override
@@ -120,6 +127,11 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
     @Override
     public void loadComplete() {
         //TODO
+    }
+
+    @Override
+    public void fillArticleList(List<Article> list) {
+        mAdapter.addDataList(list);
     }
 
     @Override
