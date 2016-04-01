@@ -20,6 +20,10 @@ public class HomeFindFragment extends BaseFragment<HomeFindPresenter> implements
         return new HomeFindPresenter(this);
     }
 
+
+
+
+
     @Override
     protected void init(View view) {
 
