@@ -1,5 +1,7 @@
 package com.hhl.devheadline.ui.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hhl.devheadline.R;
 import com.hhl.devheadline.model.Article;
+import com.hhl.devheadline.ui.activity.NoteDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +26,10 @@ import butterknife.ButterKnife;
 public class HomeChoiceAdapter extends RecyclerView.Adapter<HomeChoiceAdapter.ChoiceViewHolder> {
 
     private final List<Article> dataList = new ArrayList<>();
+    private Context context;
 
-    public HomeChoiceAdapter() {
+    public HomeChoiceAdapter(Context context) {
+        this.context = context;
     }
 
     public void addDataList(List<Article> list) {
@@ -48,8 +53,17 @@ public class HomeChoiceAdapter extends RecyclerView.Adapter<HomeChoiceAdapter.Ch
     }
 
     @Override
-    public void onBindViewHolder(ChoiceViewHolder holder, int position) {
+    public void onBindViewHolder(final ChoiceViewHolder holder, final int position) {
         holder.bindData(dataList.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, NoteDetailsActivity.class);
+                intent.putExtra("Original_url", dataList.get(position).getOriginal_url());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override

@@ -3,8 +3,6 @@ package com.hhl.devheadline.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
-import android.support.annotation.Nullable;
 
 import com.hhl.devheadline.R;
 import com.hhl.devheadline.presenter.SettingPresenter;
@@ -15,14 +13,13 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements I
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction().replace(R.id.container,
-                    new SettingFragment()).commit();
-        }
+//        if (savedInstanceState == null) {
+//            getFragmentManager().beginTransaction().replace(R.id.container,
+//                    new SettingFragment()).commit();
+//        }
     }
 
     @Override
@@ -43,12 +40,12 @@ public class SettingActivity extends BaseActivity<SettingPresenter> implements I
         context.startActivity(intent);
     }
 
-    public static class SettingFragment extends PreferenceFragment {
-
-        @Override
-        public void onCreate(@Nullable Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.setting);
-        }
-    }
+//    public static class SettingFragment extends PreferenceFragment {
+//
+//        @Override
+//        public void onCreate(@Nullable Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//            addPreferencesFromResource(R.xml.setting);
+//        }
+//    }
 }

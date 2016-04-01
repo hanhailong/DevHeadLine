@@ -28,6 +28,10 @@
             android:label="@string/nav_setting"
             android:theme="@style/AppTheme.NoActionBar.Activity" />
         <activity
+            android:name=".ui.activity.NoteDetailsActivity"
+            android:label="@string/act_notedetails"
+            android:theme="@style/AppTheme.NoActionBar.Activity" />
+        <activity
             android:name=".ui.activity.LaunchActivity"
             android:theme="@style/AppTheme.NoActionBar.Launch">
             <intent-filter>

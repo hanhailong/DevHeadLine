@@ -4,8 +4,8 @@ def config = rootProject.ext.configuration
 def libs = rootProject.ext.libraries
 
 android {
-    compileSdkVersion config.COMPILE_VERSION
-    buildToolsVersion config.BUILD_TOOLS_VERSION
+    compileSdkVersion 23
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId config.PACKAGE_NAME
@@ -24,7 +24,7 @@ android {
     productFlavors {
         dev {
             //目的，加速编译，利用ART
-            minSdkVersion 21
+            minSdkVersion 18
         }
         pro {
             minSdkVersion config.MIN_SDK
@@ -51,9 +51,9 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     //support
-    compile "com.android.support:appcompat-v7:${libs.version_support}"
-    compile "com.android.support:design:${libs.version_support}"
-    compile "com.android.support:support-v4:${libs.version_support}"
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:support-v4:23.2.0'
     //butterknife依赖注入
     compile "com.jakewharton:butterknife:${libs.VERSION_BUTTERKNIFE}"
     //ReactiveX
