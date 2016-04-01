@@ -17,4 +17,25 @@
     <string name="nav_favorite">我的收藏</string>
     <string name="nav_feedback">意见反馈</string>
     <string name="nav_setting">设置</string>
+    <string name="act_notedetails">详情</string>
+    <string name="notedetail_text_name">"选择 韩海龙\n龚勇峰 创建 | 作者 抛物线"</string>
+    <string name="notedetail_hal">"韩海龙"</string>
+    <string name="notedetail_halgyf">"韩海龙龚勇峰"</string>
+    <string name="setting_contactour">"联系我们"</string>
+    <string name="setting_cooperate">"商务合作"</string>
+    <string name="setting_cooperate_inside">"我们以开放的心态寻求合作"</string>
+    <string name="setting_notice">"通知"</string>
+    <string name="setting_notice_push">"接受消息推送"</string>
+    <string name="setting_notice_article">"及时为您推荐精选文章"</string>
+    <string name="setting_share">"分享"</string>
+    <string name="setting_clickborad">"监听剪切板"</string>
+    <string name="setting_clickborad_url">"发现url格式将自动打开分享页面"</string>
+    <string name="setting_other">"其他"</string>
+    <string name="setting_updata">"检查更新"</string>
+    <string name="setting_clearcache">"清除缓存"</string>
+    <string name="setting_share_friend">"推荐App给好友"</string>
+    <string name="setting_givemark">"为应用评分"</string>
+    <string name="setting_about">"关于"</string>
+
+
 </resources>

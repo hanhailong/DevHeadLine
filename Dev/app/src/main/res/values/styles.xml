@@ -23,4 +23,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="StyleTitleText">
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:textColor">#444444</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>
