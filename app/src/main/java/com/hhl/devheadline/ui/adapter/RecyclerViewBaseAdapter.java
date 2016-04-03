@@ -11,7 +11,7 @@ import java.util.List;
  * 防止冗余代码
  * Created by HanHailong on 16/3/16.
  */
-public abstract class AbstractBaseAdapter<T> extends RecyclerView.Adapter {
+public abstract class RecyclerViewBaseAdapter<T> extends RecyclerView.Adapter {
 
     protected List<T> dataList = new ArrayList<T>();
 

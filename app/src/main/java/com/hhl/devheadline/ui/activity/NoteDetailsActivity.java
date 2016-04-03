@@ -1,5 +1,7 @@
 package com.hhl.devheadline.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,12 +26,12 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hhl.devheadline.R;
 import com.hhl.devheadline.presenter.NoteDetailsPresenter;
 import com.hhl.devheadline.ui.iview.INoteDetailsView;
 import com.hhl.devheadline.utils.AppTools;
+import com.hhl.devheadline.utils.ToastUtils;
 
 import butterknife.Bind;
 import rx.Observable;
@@ -42,6 +44,9 @@ import rx.schedulers.Schedulers;
  * Created by Administrator on 2016/3/29.
  */
 public class NoteDetailsActivity extends BaseActivity<NoteDetailsPresenter> implements INoteDetailsView {
+
+    private static final String ORIGINAL_URL = "original_url";
+
     @Bind(R.id.details_bar)
     ProgressBar progressBar;
     @Bind(R.id.details_webview)
@@ -56,6 +61,17 @@ public class NoteDetailsActivity extends BaseActivity<NoteDetailsPresenter> impl
     String title;
     Animation showAnim, dismissAnim;
     float downY = 0, offsetY = 0;
+
+    /**
+     * 启动{@link NoteDetailsActivity}
+     *
+     * @param context
+     */
+    public static void launch(Context context, String url) {
+        Intent intent = new Intent(context, NoteDetailsActivity.class);
+        intent.putExtra(ORIGINAL_URL, url);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,22 +89,22 @@ public class NoteDetailsActivity extends BaseActivity<NoteDetailsPresenter> impl
                 SpannableString spanabelInfo = new SpannableString(s);
                 int lenth = s.indexOf(getResources().getString(R.string.notedetail_hal));
                 spanabelInfo.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)),
-                        lenth, lenth + getResources().getString(R.string.notedetail_halgyf).length()+1,
+                        lenth, lenth + getResources().getString(R.string.notedetail_halgyf).length() + 1,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 return spanabelInfo;
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).
                 subscribe(new Action1<SpannableString>() {
-            @Override
-            public void call(SpannableString spanableInfo) {
-                textView.setText(spanableInfo);
-            }
-        });
+                    @Override
+                    public void call(SpannableString spanableInfo) {
+                        textView.setText(spanableInfo);
+                    }
+                });
         showAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bottom_show);
         dismissAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bottom_dismiss);
         WebSettings webSettings = webView.getSettings();
         //先加载文字后加载图片
-        if(Build.VERSION.SDK_INT >= 19) {
+        if (Build.VERSION.SDK_INT >= 19) {
             webSettings.setLoadsImagesAutomatically(true);
         } else {
             webSettings.setLoadsImagesAutomatically(false);
@@ -104,7 +120,7 @@ public class NoteDetailsActivity extends BaseActivity<NoteDetailsPresenter> impl
         webSettings.setLoadWithOverviewMode(true);
         webView.setWebViewClient(new MyWebViewClient());
         webView.setWebChromeClient(new MyWebChromeClient());
-        loadingUrl = getIntent().getStringExtra("Original_url");
+        loadingUrl = getIntent().getStringExtra(ORIGINAL_URL);
         webView.loadUrl(loadingUrl);
         webView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -163,7 +179,7 @@ public class NoteDetailsActivity extends BaseActivity<NoteDetailsPresenter> impl
         @Override
         public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
             result.confirm();
-            Toast.makeText(NoteDetailsActivity.this, "" + message, Toast.LENGTH_SHORT).show();
+            ToastUtils.toast(message);
             return true;
         }
 
@@ -212,7 +228,7 @@ public class NoteDetailsActivity extends BaseActivity<NoteDetailsPresenter> impl
             //接触数据绑定
             view.getSettings().setBlockNetworkImage(false);
             //先加载文字在加载图片
-            if(!webView.getSettings().getLoadsImagesAutomatically()) {
+            if (!webView.getSettings().getLoadsImagesAutomatically()) {
                 webView.getSettings().setLoadsImagesAutomatically(true);
             }
             super.onPageFinished(view, url);

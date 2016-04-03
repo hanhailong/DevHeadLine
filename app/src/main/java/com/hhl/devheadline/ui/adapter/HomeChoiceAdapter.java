@@ -1,7 +1,6 @@
 package com.hhl.devheadline.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,12 +54,11 @@ public class HomeChoiceAdapter extends RecyclerView.Adapter<HomeChoiceAdapter.Ch
     @Override
     public void onBindViewHolder(final ChoiceViewHolder holder, final int position) {
         holder.bindData(dataList.get(position));
+        holder.itemView.setClickable(true);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, NoteDetailsActivity.class);
-                intent.putExtra("Original_url", dataList.get(position).getOriginal_url());
-                context.startActivity(intent);
+                NoteDetailsActivity.launch(context, dataList.get(position).getOriginal_url());
             }
         });
 
