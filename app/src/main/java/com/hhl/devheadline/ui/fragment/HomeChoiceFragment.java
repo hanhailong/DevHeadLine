@@ -128,6 +128,7 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
     @Override
     public void loadError(Throwable e) {
         Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_SHORT).show();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -139,7 +140,6 @@ public class HomeChoiceFragment extends BaseFragment<HomeChoicePresenter> implem
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }, 1000);
-        ;
     }
 
     @Override

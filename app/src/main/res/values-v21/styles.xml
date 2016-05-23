@@ -9,7 +9,7 @@
 
     <style name="AppTheme.NoActionBar.Launch">
         <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowBackground">@drawable/bg_launch</item>
     </style>
 
     <style name="AppTheme.NoActionBar.Activity">

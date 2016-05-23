@@ -35,4 +35,10 @@ public class LaunchActivity extends BaseActivity<LaunchPresenter> implements ILa
         MainActivity.launch(LaunchActivity.this);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        //禁用返回键
+//        super.onBackPressed();
+    }
 }

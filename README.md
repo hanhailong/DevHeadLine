@@ -13,6 +13,7 @@
 
 # 修改日期
 
+* 16/5/24 修改启动页,解决app初始启动时不显示logo的bug
 * 16/3/18 添加首页数据
 * 16/3/17 封装Retrofit2+RxJava，添加首页Banner，并集成开发者头条的Banner接口
 * 16/3/16 添加Retrofit2.0

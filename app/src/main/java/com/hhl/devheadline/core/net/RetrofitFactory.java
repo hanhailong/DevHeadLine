@@ -3,6 +3,11 @@ package com.hhl.devheadline.core.net;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -22,6 +27,19 @@ public class RetrofitFactory {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls()
             .create();
 
+    private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
+            .addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(Chain chain) throws IOException {
+                    // TODO: (hhl) 拦截返回的结果
+                    Response response = chain.proceed(chain.request());
+
+                    // TODO: (hhl) 以后优化
+
+                    return response;
+                }
+            }).build();
+
     public static ApiService getApiService() {
         return SingletonHolder.apiService;
     }
@@ -32,6 +50,7 @@ public class RetrofitFactory {
     private static class SingletonHolder {
         static Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(host)
+//                .client(OK_HTTP_CLIENT)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build();
