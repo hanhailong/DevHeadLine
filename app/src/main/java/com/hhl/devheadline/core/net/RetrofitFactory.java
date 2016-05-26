@@ -2,11 +2,13 @@ package com.hhl.devheadline.core.net;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.hhl.devheadline.utils.L;
 
 import java.io.IOException;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -31,8 +33,13 @@ public class RetrofitFactory {
             .addInterceptor(new Interceptor() {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
+                    Request request = chain.request();
+                    String url = request.url().toString();
+                    L.e("请求的url", url);
+
                     // TODO: (hhl) 拦截返回的结果
                     Response response = chain.proceed(chain.request());
+
 
                     // TODO: (hhl) 以后优化
 
@@ -50,7 +57,7 @@ public class RetrofitFactory {
     private static class SingletonHolder {
         static Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(host)
-//                .client(OK_HTTP_CLIENT)
+                .client(OK_HTTP_CLIENT)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .build();
